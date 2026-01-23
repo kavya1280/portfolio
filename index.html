@@ -106,59 +106,29 @@
         .skill-box:hover { border-color: var(--primary); transform: translateY(-5px); }
         .skill-box h3 { margin-bottom: 20px; color: var(--primary); font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
         .skill-list { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; }
-        
-        /* Clickable Skill Items */
-        .skill-list li { 
-            background: rgba(16, 185, 129, 0.1); 
-            border: 1px solid rgba(16, 185, 129, 0.3); 
-            padding: 5px 12px; border-radius: 6px; font-size: 0.9rem; 
-            color: var(--text-main); cursor: pointer; transition: 0.3s;
-        }
-        .skill-list li:hover { background: var(--primary); color: white; transform: scale(1.05); }
+        .skill-list li { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 5px 12px; border-radius: 6px; font-size: 0.9rem; color: var(--text-main); }
 
         /* --- EXPERIENCE SECTION --- */
         .timeline { position: relative; max-width: 900px; margin: 0 auto; }
         .timeline-item { position: relative; padding-left: 30px; border-left: 2px solid var(--primary); margin-bottom: 40px; }
         .timeline-item::before { content: ""; position: absolute; left: -9px; top: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--primary); border: 4px solid var(--bg-dark); }
         .timeline-date { color: var(--secondary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
-        .timeline-content { background: var(--bg-card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: var(--transition); }
-        .timeline-content:hover { border-color: var(--primary); transform: translateX(10px); }
+        .timeline-content { background: var(--bg-card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); }
         .timeline-content h3 { font-size: 1.3rem; margin-bottom: 5px; }
         .timeline-content h4 { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; }
         .timeline-content ul { padding-left: 20px; color: var(--text-muted); font-size: 0.9rem; }
 
         /* --- LEADERSHIP & ACTIVITIES --- */
         .activities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .activity-card { background: var(--bg-card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); transition: var(--transition); cursor: pointer; }
-        .activity-card:hover { border-color: var(--secondary); background: rgba(59, 130, 246, 0.05); transform: translateY(-5px); }
+        .activity-card { background: var(--bg-card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); transition: var(--transition); }
+        .activity-card:hover { border-color: var(--secondary); background: rgba(59, 130, 246, 0.05); }
         .activity-card i { font-size: 1.5rem; color: var(--secondary); margin-bottom: 15px; }
         .activity-card h4 { margin-bottom: 10px; color: var(--text-main); }
         .activity-card p { font-size: 0.9rem; color: var(--text-muted); }
 
-        /* --- PROOF OVERLAY (NEW) --- */
-        .proof-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.95); z-index: 2000;
-            display: none; align-items: center; justify-content: center;
-            padding: 20px; backdrop-filter: blur(10px);
-        }
-        .proof-content {
-            background: var(--bg-card); max-width: 800px; width: 100%;
-            max-height: 90vh; overflow-y: auto; border-radius: 20px;
-            border: 1px solid var(--border); position: relative;
-            padding: 40px; animation: slideUp 0.4s ease-out;
-        }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .close-proof { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--text-muted); cursor: pointer; transition: 0.3s; }
-        .close-proof:hover { color: var(--primary); }
-        .proof-img { width: 100%; border-radius: 12px; margin-bottom: 25px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .proof-text h2 { color: var(--primary); margin-bottom: 15px; font-size: 2rem; }
-        .proof-text p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; }
-
         /* --- PROJECTS --- */
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .project-card { background: var(--bg-card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: 0.3s; }
-        .project-card:hover { border-color: var(--primary); transform: scale(1.02); }
+        .project-card { background: var(--bg-card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); }
         .project-card h3 { color: var(--primary); margin-bottom: 10px; }
         .project-card p { font-size: 0.9rem; color: var(--text-muted); }
 
@@ -172,18 +142,6 @@
     </style>
 </head>
 <body>
-
-    <!-- PROOF OVERLAY STRUCTURE -->
-    <div class="proof-overlay" id="proofOverlay">
-        <div class="proof-content">
-            <span class="close-proof" onclick="closeProof()">&times;</span>
-            <img src="" alt="Proof" id="proofImage" class="proof-img">
-            <div class="proof-text">
-                <h2 id="proofTitle">Detail Title</h2>
-                <p id="proofDescription">Detail description goes here...</p>
-            </div>
-        </div>
-    </div>
 
     <nav class="navbar">
         <div class="nav-logo">KAVYA<span></span>NAIR</div>
@@ -201,7 +159,7 @@
     <section class="hero" id="about">
         <div class="hero-text">
             <div class="badge">Aspiring IT & Operations Professional</div>
-            <h1>Data Associate<br>& <span class="gradient-text">QA Automation</span></h1>
+            <h1>Data Associate<br>& <span class="gradient-text">QA Automation/span></h1>-\t c vzxazsdnn0.
             <p>Passionate and detail-oriented professional with a strong foundation in Manual and Automation testing, Python development, and analytical operations.</p>
             <div class="hero-cta">
                 <a href="#contact" class="resume-btn" style="padding: 14px 35px;">Get In Touch</a>
@@ -234,12 +192,8 @@
             <div class="skill-box">
                 <h3><i class="fas fa-laptop-code"></i> Technical Skills</h3>
                 <ul class="skill-list">
-                    <li onclick="openProof('playwright')">Playwright</li>
-                    <li onclick="openProof('jira')">Jira</li>
-                    <li onclick="openProof('postman')">Postman</li>
-                    <li onclick="openProof('python')">Python</li>
-                    <li onclick="openProof('selenium')">Selenium</li>
-                    <li>Linux</li><li>WordPress</li><li>HTML5</li><li>DBMS</li>
+                    <li>Playwright</li><li>Jira</li><li>Postman (API Testing)</li><li>Linux</li>
+                    <li>WordPress</li><li>Python</li><li>HTML5</li><li>DBMS</li><li>Selenium</li>
                 </ul>
             </div>
             <div class="skill-box">
@@ -259,27 +213,38 @@
             <!-- Gieom -->
             <div class="timeline-item">
                 <div class="timeline-date">Jan - Feb 2024</div>
-                <div class="timeline-content" onclick="openProof('gieom')">
+                <div class="timeline-content">
                     <h3>Software Tester Intern</h3>
                     <h4>GIEOM Business Solutions</h4>
                     <ul>
                         <li>Gained hands-on experience in manual and automation testing using Playwright and Postman.</li>
                         <li>Contributed to test case development, bug reporting, and enhancing software quality.</li>
+                        <li>Worked on CI/CD practices and server administration.</li>
                     </ul>
-                    <p style="margin-top:10px; font-size: 0.8rem; color: var(--primary);">Click to view proof →</p>
                 </div>
             </div>
             <!-- Zion IT -->
             <div class="timeline-item">
                 <div class="timeline-date">8 Months</div>
-                <div class="timeline-content" onclick="openProof('zion')">
+                <div class="timeline-content">
                     <h3>Main Project Software Programmer</h3>
                     <h4>Zion IT Company Software and Network</h4>
                     <ul>
                         <li>Programmer in Python for Academic Project and Research paper uploading system.</li>
                         <li>Managed end-to-end development of the system modules.</li>
                     </ul>
-                    <p style="margin-top:10px; font-size: 0.8rem; color: var(--primary);">Click to view proof →</p>
+                </div>
+            </div>
+            <!-- Keltron -->
+            <div class="timeline-item">
+                <div class="timeline-date">15 Days</div>
+                <div class="timeline-content">
+                    <h3>AI Trainee</h3>
+                    <h4>KELTRON</h4>
+                    <ul>
+                        <li>Learned Python basics, libraries, and introduction to AI algorithms.</li>
+                        <li>Completed a mini-project in Artificial Intelligence.</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -289,20 +254,25 @@
     <section id="activities" class="animated-section">
         <h2 class="section-title">Leadership & Volunteering</h2>
         <div class="activities-grid">
-            <div class="activity-card" onclick="openProof('speaker')">
+            <div class="activity-card">
                 <i class="fas fa-microphone-alt"></i>
                 <h4>Speaker @ Envisage'22</h4>
-                <p>Delivered session on Cybersecurity and Cybercrime for students. Click to view details.</p>
-            </div>
-            <div class="activity-card" onclick="openProof('hackathon')">
-                <i class="fas fa-trophy"></i>
-                <h4>Smart India Hackathon</h4>
-                <p>Participated in SIH 2023 at St. Joseph’s Group of Institutions, Chennai.</p>
+                <p>Delivered session on Cybersecurity and Cybercrime for 10th-grade students in memory of Dr. A.P.J. Abdul Kalam.</p>
             </div>
             <div class="activity-card">
                 <i class="fas fa-users-cog"></i>
                 <h4>Cultural Coordinator</h4>
-                <p>Led cultural activities for 'Euphoria 2024' at Rajagiri College.</p>
+                <p>Led cultural activities for 'Euphoria 2024' at Rajagiri College of Social Sciences.</p>
+            </div>
+            <div class="activity-card">
+                <i class="fas fa-briefcase"></i>
+                <h4>Placement Coordinator</h4>
+                <p>Served as the link between students and the placement cell at St. Teresa's College.</p>
+            </div>
+            <div class="activity-card">
+                <i class="fas fa-trophy"></i>
+                <h4>Smart India Hackathon</h4>
+                <p>Participated in SIH 2023 at St. Joseph’s Group of Institutions, Chennai.</p>
             </div>
         </div>
     </section>
@@ -311,78 +281,70 @@
     <section id="projects">
         <h2 class="section-title">Projects</h2>
         <div class="project-grid">
-            <div class="project-card" onclick="openProof('skillshare')">
+            <div class="project-card">
                 <h3>SkillShare</h3>
-                <p>An Android app for users to upload and showcase skills. Click for details.</p>
+                <p>An Android app for users to upload and showcase skills, enabling expertise-based collaboration.</p>
             </div>
-            <div class="project-card" onclick="openProof('houseprice')">
+            <div class="project-card">
                 <h3>HousePrice Analysis</h3>
-                <p>A Python-based project identifying key factors affecting property prices.</p>
+                <p>A Python-based project identifying key factors affecting property prices using data analysis.</p>
+            </div>
+            <div class="project-card">
+                <h3>Adveda Finance</h3>
+                <p>Project providing expert financial advisory services to individuals and businesses.</p>
             </div>
         </div>
     </section>
 
+    <!-- EDUCATION SECTION -->
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div class="skill-box">
+                <span class="timeline-date">2023 - 2025</span>
+                <h3>MCA</h3>
+                <p>Rajagiri College of Social Sciences</p>
+                <p>GPA: 6.2</p>
+            </div>
+            <div class="skill-box">
+                <span class="timeline-date">2020 - 2023</span>
+                <h3>BVoc Software Development</h3>
+                <p>St. Teresa's College (Autonomous)</p>
+                <p>GPA: 7.9</p>
+            </div>
+            <div class="skill-box">
+                <span class="timeline-date">2018 - 2020</span>
+                <h3>12th Commerce Info</h3>
+                <p>Bhavan's Munshi Vidyashram</p>
+                <p>GPA: 8.2</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" style="border-bottom: none;">
+        <h2 class="section-title">Let's Connect</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <a href="mailto:knair1280@gmail.com" class="activity-card" style="text-align: center; text-decoration: none;">
+                <i class="fas fa-envelope"></i>
+                <p>knair1280@gmail.com</p>
+            </a>
+            <a href="tel:9072622115" class="activity-card" style="text-align: center; text-decoration: none;">
+                <i class="fas fa-phone"></i>
+                <p>+91 9072622115</p>
+            </a>
+            <a href="https://linkedin.com/in/kavya-nair-8219a822b" target="_blank" class="activity-card" style="text-align: center; text-decoration: none;">
+                <i class="fab fa-linkedin"></i>
+                <p>LinkedIn Profile</p>
+            </a>
+        </div>
+    </section>
+
     <footer style="padding: 50px; text-align: center; background: #0b1120; color: var(--text-muted); font-size: 0.85rem;">
-        © 2026 Kavya Nair | Data Associate & QA
+        © 2024 Kavya Nair | Data Associate & QA
     </footer>
 
     <script>
-        // --- DATA OBJECT (Fill this with your images and descriptions) ---
-        const proofData = {
-            'playwright': {
-                title: 'Playwright Automation',
-                image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80', // Replace with your screenshot
-                description: 'Hands-on experience building end-to-end testing frameworks. Used Playwright for cross-browser testing and automating UI interactions.'
-            },
-            'gieom': {
-                title: 'Internship at GIEOM',
-                image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80', // Replace with certificate/photo
-                description: 'During my internship at GIEOM Business Solutions, I worked on manual and automation testing. I was responsible for identifying bugs and validating workflows for fintech applications.'
-            },
-            'zion': {
-                title: 'Zion IT Software Programmer',
-                image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80', // Replace with project screenshot
-                description: 'Lead programmer for a Python-based Academic Research portal. I handled the database design and the file processing logic.'
-            },
-            'speaker': {
-                title: 'Speaker at Envisage 2022',
-                image: 'https://images.unsplash.com/photo-1475721027785-f74dea327912?auto=format&fit=crop&w=800&q=80', // Replace with event photo
-                description: 'Conducted a session for 10th-grade students on the topics of Cybersecurity and Cybercrime prevention in memory of Dr. A.P.J. Abdul Kalam.'
-            },
-            'hackathon': {
-                title: 'Smart India Hackathon 2023',
-                image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80', // Replace with event photo
-                description: 'Represented my college in the national level SIH 2023 held in Chennai. We worked on innovative solutions for social problem statements.'
-            },
-            'skillshare': {
-                title: 'SkillShare Android App',
-                image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80', // Replace with app screenshot
-                description: 'An Android application designed to bridge the gap between skill-seekers and experts. Built using Java/Kotlin and Firebase.'
-            }
-        };
-
-        // --- PROOF LOGIC ---
-        function openProof(key) {
-            const data = proofData[key];
-            if(!data) return;
-
-            document.getElementById('proofImage').src = data.image;
-            document.getElementById('proofTitle').textContent = data.title;
-            document.getElementById('proofDescription').textContent = data.description;
-            document.getElementById('proofOverlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Stop scrolling
-        }
-
-        function closeProof() {
-            document.getElementById('proofOverlay').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Enable scrolling
-        }
-
-        // Close on clicking outside the content
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('proofOverlay')) closeProof();
-        }
-
         // --- TYPING EFFECT ---
         const texts = ["Data Associate", "Software Tester", "QA Automation", "MCA Professional"];
         let count = 0, index = 0, currentText = "", letter = "", isDeleting = false;
@@ -409,7 +371,7 @@
                 }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('section, .skill-box, .timeline-item, .activity-card, .project-card').forEach(el => { el.style.opacity = '0'; observer.observe(el); });
+        document.querySelectorAll('section, .skill-box, .timeline-item, .activity-card').forEach(el => { el.style.opacity = '0'; observer.observe(el); });
     </script>
 </body>
 </html>
