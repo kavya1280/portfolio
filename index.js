@@ -290,3 +290,180 @@ sections.forEach(s => navObserver.observe(s));
 console.log('%c✦ Kavya Nair', 'font-size:22px;font-weight:bold;color:#10b981;font-family:serif');
 console.log('%cData Associate · QA Engineer · MCA Graduate', 'font-size:13px;color:#64748b');
 console.log('%c📬 knair1280@gmail.com', 'font-size:12px;color:#60a5fa');
+
+// ============================================
+// 13. SCROLL PROGRESS BAR + BACK-TO-TOP RING
+// ============================================
+const scrollProgressBar = document.getElementById('scrollProgressBar');
+const backToTop = document.getElementById('backToTop');
+const bttProgress = document.getElementById('bttProgress');
+const BTT_CIRCUMFERENCE = 2 * Math.PI * 19; // r=19
+
+function updateScrollChrome() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+
+    if (scrollProgressBar) scrollProgressBar.style.width = (pct * 100) + '%';
+
+    if (bttProgress) {
+        bttProgress.style.strokeDashoffset = BTT_CIRCUMFERENCE * (1 - pct);
+    }
+    if (backToTop) {
+        backToTop.classList.toggle('visible', scrollTop > 480);
+    }
+}
+window.addEventListener('scroll', updateScrollChrome, { passive: true });
+window.addEventListener('resize', updateScrollChrome);
+updateScrollChrome();
+
+if (backToTop) {
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    });
+}
+
+// ============================================
+// 14. TIMELINE ANIMATED PROGRESS LINE
+// ============================================
+function updateTimelineProgress() {
+    const timeline = document.querySelector('.timeline');
+    const progress = document.getElementById('timelineProgress');
+    if (!timeline || !progress) return;
+
+    const rect = timeline.getBoundingClientRect();
+    const winH = window.innerHeight;
+    const startPoint = winH * 0.82;
+    const totalDistance = rect.height + winH * 0.3;
+    const scrolled = startPoint - rect.top;
+    const pct = totalDistance > 0 ? Math.min(1, Math.max(0, scrolled / totalDistance)) : 0;
+
+    progress.style.height = (pct * 100) + '%';
+}
+window.addEventListener('scroll', updateTimelineProgress, { passive: true });
+window.addEventListener('resize', updateTimelineProgress);
+updateTimelineProgress();
+
+// ============================================
+// 15. STAT COUNTERS (count up on scroll into view)
+// ============================================
+function animateCount(el) {
+    const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    const isYear = target > 100; // treat large numbers (e.g. 2025) as instant/no-comma display
+    const duration = isYear ? 900 : 1100;
+    const startTime = performance.now();
+
+    function tick(now) {
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+        const value = Math.round(target * eased);
+        el.textContent = value.toLocaleString();
+        if (t < 1) requestAnimationFrame(tick);
+        else el.textContent = target.toLocaleString();
+    }
+    requestAnimationFrame(tick);
+}
+
+const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.stat-num').forEach(el => {
+                if (prefersReducedMotion) {
+                    el.textContent = (el.getAttribute('data-count') || '0');
+                } else {
+                    animateCount(el);
+                }
+            });
+            statObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.4 });
+
+const statsGridEl = document.querySelector('.stats-grid');
+if (statsGridEl) statObserver.observe(statsGridEl);
+
+// ============================================
+// 16. 3D TILT CARDS
+// ============================================
+function initTilt(el, maxTilt = 8, lift = 8) {
+    el.classList.add('tilt-card');
+
+    el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rotateX = (0.5 - py) * maxTilt;
+        const rotateY = (px - 0.5) * maxTilt;
+        el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-${lift}px)`;
+        el.style.setProperty('--mx', (px * 100) + '%');
+        el.style.setProperty('--my', (py * 100) + '%');
+        el.classList.add('tilt-hover');
+    });
+
+    el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
+        el.classList.remove('tilt-hover');
+    });
+}
+
+if (!prefersReducedMotion) {
+    document.querySelectorAll('.project-card, .skill-box, .activity-card, .education-card, .cert-card')
+        .forEach(el => initTilt(el, 7, 8));
+}
+
+// ============================================
+// 17. SCRAMBLE-TEXT HEADING REVEAL
+// ============================================
+const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ01#$%';
+
+function scrambleReveal(el, duration = 700) {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    let node;
+    while ((node = walker.nextNode())) {
+        if (node.textContent.trim().length) textNodes.push(node);
+    }
+    if (!textNodes.length) return;
+
+    el.classList.add('is-scrambling');
+    const originals = textNodes.map(n => n.textContent);
+    const frameMs = 28;
+    const totalFrames = Math.round(duration / frameMs);
+    let frame = 0;
+
+    const interval = setInterval(() => {
+        frame++;
+        textNodes.forEach((n, idx) => {
+            const original = originals[idx];
+            const len = original.length;
+            const revealCount = Math.floor((frame / totalFrames) * len);
+            let out = '';
+            for (let i = 0; i < len; i++) {
+                const ch = original[i];
+                if (ch === ' ' || i < revealCount) out += ch;
+                else out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+            }
+            n.textContent = out;
+        });
+        if (frame >= totalFrames) {
+            textNodes.forEach((n, idx) => { n.textContent = originals[idx]; });
+            el.classList.remove('is-scrambling');
+            clearInterval(interval);
+        }
+    }, frameMs);
+}
+
+if (!prefersReducedMotion) {
+    const headingObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const heading = entry.target.querySelector('h2');
+                if (heading) setTimeout(() => scrambleReveal(heading), 150);
+                headingObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.4 });
+
+    document.querySelectorAll('.section-header').forEach(el => headingObserver.observe(el));
+}

@@ -1638,3 +1638,212 @@ ul {
 .education-card {
     will-change: transform;
 }
+
+/* ============================================
+   SCROLL PROGRESS BAR
+   ============================================ */
+.scroll-progress-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 10000;
+    background: hsla(217, 33%, 16%, 0.4);
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--gradient);
+    box-shadow: 0 0 12px var(--primary-glow);
+    transition: width 0.08s linear;
+}
+
+/* ============================================
+   TILT CARDS (3D pointer-driven, JS sets transform)
+   ============================================ */
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.tilt-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle 220px at var(--mx, 50%) var(--my, 50%), hsla(160, 84%, 60%, 0.14), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.tilt-card.tilt-hover::after {
+    opacity: 1;
+}
+
+.projects-grid,
+.skills-grid,
+.activities-grid,
+.education-grid,
+.certs-grid {
+    perspective: 1400px;
+}
+
+/* ============================================
+   STATS STRIP
+   ============================================ */
+.stats-strip {
+    padding: 3.5rem 0;
+    position: relative;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.stat-item {
+    background: hsla(217, 33%, 11%, 0.55);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 2rem 1.25rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.stat-item:hover {
+    background: hsla(217, 33%, 14%, 0.75);
+}
+
+.stat-value {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.15rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: clamp(1.9rem, 4vw, 2.75rem);
+}
+
+.stat-num {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-plus {
+    color: var(--primary);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.stat-label {
+    margin-top: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
+
+@media (max-width: 700px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ============================================
+   BACK TO TOP
+   ============================================ */
+.back-to-top {
+    position: fixed;
+    right: 1.75rem;
+    bottom: 1.75rem;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsla(217, 33%, 11%, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--text);
+    cursor: none;
+    z-index: 500;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.back-to-top svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.back-to-top .btt-track {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 2;
+}
+
+.back-to-top .btt-progress {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 119.4;
+    stroke-dashoffset: 119.4;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+/* ============================================
+   SCRAMBLE TEXT (JS-driven reveal on headings)
+   ============================================ */
+.is-scrambling {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .tilt-card {
+        transform: none !important;
+    }
+}
