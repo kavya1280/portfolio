@@ -20,6 +20,11 @@
 
 <body>
 
+    <!-- Scroll Progress -->
+    <div class="scroll-progress-track">
+        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+    </div>
+
     <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
@@ -139,6 +144,30 @@
         </div>
     </section>
 
+    <!-- Stats Strip -->
+    <section class="stats-strip">
+        <div class="container">
+            <div class="stats-grid" data-animate="fade-up">
+                <div class="stat-item">
+                    <div class="stat-value"><span class="stat-num" data-count="4">0</span></div>
+                    <p class="stat-label">Roles Held at AJALabs & Beyond</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value"><span class="stat-num" data-count="3">0</span></div>
+                    <p class="stat-label">Featured Projects Shipped</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value"><span class="stat-num" data-count="5">0</span></div>
+                    <p class="stat-label">Certifications & Trainings</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value"><span class="stat-num" data-count="2025">0</span></div>
+                    <p class="stat-label">MCA Graduate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Skills Section -->
     <section id="skills" class="section">
         <div class="section-stripe"></div>
@@ -210,6 +239,7 @@
                 <h2>Work <span class="gradient-text">Experience</span></h2>
             </div>
             <div class="timeline">
+                <div class="timeline-progress" id="timelineProgress"></div>
                 <div class="timeline-item" data-animate="fade-right">
                     <div class="timeline-dot active"></div>
                     <span class="timeline-date"><span class="dot-live"></span> Dec 2025 – Present</span>
@@ -465,6 +495,15 @@
             <p class="footer-sub">Designed &amp; Built with ♥</p>
         </div>
     </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 44 44">
+            <circle class="btt-track" cx="22" cy="22" r="19"></circle>
+            <circle class="btt-progress" id="bttProgress" cx="22" cy="22" r="19"></circle>
+        </svg>
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="index.js"></script>
 </body>
